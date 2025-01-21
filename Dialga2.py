@@ -115,18 +115,18 @@ def detect_and_act():
     gray_screen = cv2.cvtColor(screen, cv2.COLOR_RGB2GRAY)
 
     # Clear detected_templates to restart the loop after shiny is detected or selection screen is detected
-    if 'ShinyImage.png' in detected_templates or 'SelectionScreen.png' in detected_templates:
+    if 'Images/ShinyImage.png' in detected_templates or 'Images/SelectionScreen.png' in detected_templates:
         detected_templates = {}
 
     # List of templates to detect and corresponding actions
     templates_actions = [
-        ('StartingImage.png', starting_image_action),
-        ('Intro.png', intro_action),
-        ('Battle1.png', battle1_action),
-        ('Battle2.png', battle2_action),
-        ('Battle3.png', battle3_action),
-        ('Battle4.png', battle4_action),
-        ('SelectionScreen.png', selection_screen_action)
+        ('Images/StartingImage.png', starting_image_action),
+        ('Images/Intro.png', intro_action),
+        ('Images/Battle1.png', battle1_action),
+        ('Images/Battle2.png', battle2_action),
+        ('Images/Battle3.png', battle3_action),
+        ('Images/Battle4.png', battle4_action),
+        ('Images/SelectionScreen.png', selection_screen_action)
         
         # Add other templates and corresponding actions here
     ]
@@ -155,7 +155,7 @@ def starting_image_action():
     screen = np.array(ImageGrab.grab(bbox=(game_window.left, game_window.top, game_window.right, game_window.bottom)))
     gray_screen = cv2.cvtColor(screen, cv2.COLOR_RGB2GRAY)
 
-    ZeroFps, _, _ = is_template_present('FPS0.png', gray_screen)
+    ZeroFps, _, _ = is_template_present('Images/FPS0.png', gray_screen)
 
     if ZeroFps:
         pydirectinput.press('f6')  # Press F6 to restart the program
@@ -189,9 +189,9 @@ def battle1_action():
             screen = np.array(ImageGrab.grab(bbox=(game_window.left, game_window.top, game_window.right, game_window.bottom)))
             gray_screen = cv2.cvtColor(screen, cv2.COLOR_RGB2GRAY)
 
-            dynamax_detected, _, _ = is_template_present('Dynamax.png', gray_screen)
-            catch_detected, _, _ = is_template_present('Catch2.png', gray_screen)
-            selection_detected, _, _ = is_template_present('SelectionScreen.png', gray_screen)
+            dynamax_detected, _, _ = is_template_present('Images/Dynamax.png', gray_screen)
+            catch_detected, _, _ = is_template_present('Images/Catch2.png', gray_screen)
+            selection_detected, _, _ = is_template_present('Images/SelectionScreen.png', gray_screen)
 
     
             if dynamax_detected:
@@ -243,9 +243,9 @@ def battle2_action():
             screen = np.array(ImageGrab.grab(bbox=(game_window.left, game_window.top, game_window.right, game_window.bottom)))
             gray_screen = cv2.cvtColor(screen, cv2.COLOR_RGB2GRAY)
 
-            dynamax_detected, _, _ = is_template_present('Dynamax.png', gray_screen)
-            catch_detected, _, _ = is_template_present('Catch2.png', gray_screen)
-            selection_detected, _, _ = is_template_present('SelectionScreen.png', gray_screen)
+            dynamax_detected, _, _ = is_template_present('Images/Dynamax.png', gray_screen)
+            catch_detected, _, _ = is_template_present('Images/Catch2.png', gray_screen)
+            selection_detected, _, _ = is_template_present('Images/SelectionScreen.png', gray_screen)
             
     
             if dynamax_detected:
@@ -296,9 +296,9 @@ def battle3_action():
             screen = np.array(ImageGrab.grab(bbox=(game_window.left, game_window.top, game_window.right, game_window.bottom)))
             gray_screen = cv2.cvtColor(screen, cv2.COLOR_RGB2GRAY)
 
-            dynamax_detected, _, _ = is_template_present('Dynamax.png', gray_screen)
-            catch_detected, _, _ = is_template_present('Catch2.png', gray_screen)
-            selection_detected, _, _ = is_template_present('SelectionScreen.png', gray_screen)
+            dynamax_detected, _, _ = is_template_present('Images/Dynamax.png', gray_screen)
+            catch_detected, _, _ = is_template_present('Images/Catch2.png', gray_screen)
+            selection_detected, _, _ = is_template_present('Images/SelectionScreen.png', gray_screen)
 
     
             if dynamax_detected:
@@ -354,10 +354,10 @@ def battle4_action():
             screen = np.array(ImageGrab.grab(bbox=(game_window.left, game_window.top, game_window.right, game_window.bottom)))
             gray_screen = cv2.cvtColor(screen, cv2.COLOR_RGB2GRAY)
 
-            dynamax_detected, _, _ = is_template_present('Dynamax.png', gray_screen)
-            catch_detected, _, _ = is_template_present('Catch2.png', gray_screen)
-            selection_detected, _, _ = is_template_present('SelectionScreen.png', gray_screen)
-            nopp2, _, _ = is_template_present('NoPP2.png', gray_screen, threshold = .97)
+            dynamax_detected, _, _ = is_template_present('Images/Dynamax.png', gray_screen)
+            catch_detected, _, _ = is_template_present('Images/Catch2.png', gray_screen)
+            selection_detected, _, _ = is_template_present('Images/SelectionScreen.png', gray_screen)
+            nopp2, _, _ = is_template_present('Images/NoPP2.png', gray_screen, threshold = .97)
             
 
             if nopp2 and not ppactivated:
@@ -416,7 +416,7 @@ def selection_screen_action(attempts=3):
             gray_screen = cv2.cvtColor(screen, cv2.COLOR_RGB2GRAY)
 
             # Check if shiny Pokemon is detected
-            shiny_detected, _, _ = is_template_present('ShinyImage.png', gray_screen)
+            shiny_detected, _, _ = is_template_present('Images/ShinyImage.png', gray_screen)
 
             if shiny_detected:
                 break  # Exit the loop if shiny is detected
@@ -431,7 +431,7 @@ def selection_screen_action(attempts=3):
 
     if shiny_detected:
         # Execute the catch phase
-        print('SHINY DETECTED!')
+        print('Images/SHINY DETECTED!')
         client.run(TOKEN)
         program_running = False
 
